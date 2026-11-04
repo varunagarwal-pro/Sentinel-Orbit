@@ -34,10 +34,12 @@ jobs:
         env:
           PAT_JANITOR: ${{ secrets.PAT_JANITOR }}
           GH_TOKEN: ${{ secrets.PAT_JANITOR }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+          KEEP_RUNS: ${{ github.event.inputs.keep_runs || 1 }}
         run: |
           FLAGS="--live"
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+          if [ "$DRY_RUN" = "true" ]; then
             FLAGS=""
           fi
-          KEEP="${{ github.event.inputs.keep_runs || 1 }}"
-          python scripts/prune_account_storage.py $FLAGS --keep $KEEP
+          case "$KEEP_RUNS" in ""|*[!0-9]*) echo "keep_runs must be a number"; exit 1;; esac
+          python scripts/prune_account_storage.py $FLAGS --keep "$KEEP_RUNS"
