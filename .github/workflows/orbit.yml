@@ -1,4 +1,4 @@
-name: 🛰️ Sentinel-Orbit: Fleet Storage & Run Pruner
+name: "🛰️ Sentinel-Orbit: Fleet Storage & Run Pruner"
 
 on:
   schedule:
