@@ -1,0 +1,43 @@
+name: 🧹 Account Storage & Run Pruner
+
+on:
+  schedule:
+    # Runs daily at 04:00 UTC (9:30 AM IST)
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Simulate without deleting'
+        type: boolean
+        default: false
+      keep_runs:
+        description: 'Number of latest completed runs to keep per workflow'
+        type: number
+        default: 1
+
+jobs:
+  prune-storage:
+    name: Prune Account Caches & Runs
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Janitor Repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Execute Storage & Run Pruner
+        env:
+          PAT_JANITOR: ${{ secrets.PAT_JANITOR }}
+          GH_TOKEN: ${{ secrets.PAT_JANITOR }}
+        run: |
+          FLAGS="--live"
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            FLAGS=""
+          fi
+          KEEP="${{ github.event.inputs.keep_runs || 1 }}"
+          python scripts/prune_account_storage.py $FLAGS --keep $KEEP
