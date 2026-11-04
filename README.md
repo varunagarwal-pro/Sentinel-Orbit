@@ -1,4 +1,4 @@
-# 🛰️ Sentinel-Orbit — Autonomous Fleet Storage & Workflow Hygiene Engine
+# 🛰️ Sentinel Orbit — Autonomous Fleet Storage & Workflow Hygiene Engine
 
 [![Ecosystem](https://img.shields.io/badge/Ecosystem-Sentinel--Labs-blue?style=for-the-badge&logo=shield)](https://github.com/varunagarwal-pro)
 [![Security](https://img.shields.io/badge/Security-Zero--Code%20Access%20Fortress-red?style=for-the-badge&logo=securityscorecard)](https://github.com/varunagarwal-pro/Sentinel-Orbit)
