@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GitHub Actions Storage & Workflow Run Purge Engine
+🛰️ Sentinel-Orbit: Autonomous Fleet Storage & Workflow Run Purge Engine
 Target Account: varunagarwal-pro
 
 Features:
@@ -29,7 +29,7 @@ OWNER = "varunagarwal-pro"
 
 def get_auth_token():
     """Retrieves auth token from environment or gh CLI."""
-    token = os.environ.get("PAT_JANITOR") or os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
+    token = os.environ.get("PAT_ORBIT") or os.environ.get("PAT_JANITOR") or os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
     if token:
         return token.strip()
     res = subprocess.run(["gh", "auth", "token"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -169,7 +169,7 @@ def write_github_step_summary(summary_records, total_freed_mb, total_caches, tot
 
     mode_label = "Live Execution" if live else "Dry-Run Simulation"
     lines = [
-        f"## 🧹 GitHub Actions Storage & Workflow Run Purge Report",
+        f"## 🛰️ Sentinel-Orbit: Fleet Storage & Run Purge Report",
         f"**Mode:** {mode_label} | **Account:** `{OWNER}`",
         "",
         "### 📈 Overall Totals",
@@ -202,7 +202,7 @@ def main():
     token = get_auth_token()
     mode = "LIVE EXECUTION" if args.live else "DRY-RUN (Safe Simulation)"
     print("=" * 64)
-    print(f" GitHub Actions Account-Wide Storage Pruner: {mode}")
+    print(f" 🛰️ Sentinel-Orbit: Fleet Storage & Run Pruner ({mode})")
     print("=" * 64)
 
     print("Discovering all account repositories via GitHub API...")
