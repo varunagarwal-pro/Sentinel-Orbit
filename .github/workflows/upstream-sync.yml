@@ -1,0 +1,93 @@
+name: "🔄 Upstream sync (fleet)"
+
+# Runs from Sentinel-Orbit (public repo) to use free unlimited Actions minutes.
+# The fleet engine and fleet.toml live in the private Sentinel-Labs repo, checked
+# out here using FLEET_SYNC_PAT.
+
+on:
+  schedule:
+    - cron: "17 2 * * *"   # 07:47 IST — daily
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "check = read-only | apply = reset mirrors, open PRs/issues"
+        required: false
+        type: choice
+        options:
+          - apply
+          - check
+        default: apply
+      repo:
+        description: "Single repository name to target (blank = whole fleet)"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: upstream-sync-fleet
+  cancel-in-progress: false
+
+jobs:
+  engine-tests:
+    name: "Engine tests & lint"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Sentinel-Labs (fleet engine + fleet.toml)
+        uses: actions/checkout@v4
+        with:
+          repository: varunagarwal-pro/Sentinel-Labs
+          token: ${{ secrets.FLEET_SYNC_PAT }}
+          path: sentinel-labs
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Run engine tests
+        working-directory: sentinel-labs
+        run: |
+          python -m pip install --quiet pytest
+          python -m pytest tools/upstream/tests -q
+
+      - name: Lint fleet policy
+        working-directory: sentinel-labs
+        run: python tools/upstream/cli.py lint .
+
+  sync:
+    name: "Sync fleet"
+    needs: engine-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout Sentinel-Labs (fleet engine + fleet.toml)
+        uses: actions/checkout@v4
+        with:
+          repository: varunagarwal-pro/Sentinel-Labs
+          token: ${{ secrets.FLEET_SYNC_PAT }}
+          path: sentinel-labs
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Run fleet engine
+        working-directory: sentinel-labs
+        env:
+          GH_TOKEN: ${{ secrets.FLEET_SYNC_PAT }}
+          MODE: ${{ inputs.mode || vars.UPSTREAM_SYNC_MODE || 'apply' }}
+          REPO: ${{ inputs.repo || '' }}
+          VARUN_OPS_BOT_TOKEN: ${{ secrets.VARUN_OPS_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN}" ]; then
+            echo "::error::FLEET_SYNC_PAT is not set — refusing to run with default token"
+            exit 1
+          fi
+          args=(fleet --mode "${MODE}")
+          if [ -n "${REPO}" ]; then
+            args+=(--repo "${REPO}")
+          fi
+          python tools/upstream/cli.py "${args[@]}"
