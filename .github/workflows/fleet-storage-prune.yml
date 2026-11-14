@@ -1,8 +1,12 @@
-name: "🛰️ Sentinel-Orbit: Fleet Storage & Run Pruner"
+name: "🧹 Fleet: Storage & Run Pruner"
 
 on:
+  workflow_run:
+    workflows: ["🔄 Fleet: Upstream Sync Engine"]
+    types:
+      - completed
   schedule:
-    # Runs daily at 04:00 UTC (9:30 AM IST) - 1 hour after upstream-sync
+    # Daily fallback at 04:00 UTC (09:30 AM IST)
     - cron: '0 4 * * *'
   workflow_dispatch:
     inputs:
@@ -34,7 +38,7 @@ jobs:
         env:
           PAT_JANITOR: ${{ secrets.PAT_ORBIT || secrets.PAT_JANITOR }}
           GH_TOKEN: ${{ secrets.PAT_ORBIT || secrets.PAT_JANITOR }}
-          DRY_RUN: ${{ github.event.inputs.dry_run }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || false }}
           KEEP_RUNS: ${{ github.event.inputs.keep_runs || 1 }}
         run: |
           FLAGS="--live"

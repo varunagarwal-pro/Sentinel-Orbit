@@ -1,4 +1,4 @@
-name: "🔄 Upstream sync (fleet)"
+name: "🔄 Fleet: Upstream Sync Engine"
 
 # Runs from Sentinel-Orbit (public repo) to use free unlimited Actions minutes.
 # The fleet engine and fleet.toml live in the private Sentinel-Labs repo, checked
@@ -6,7 +6,7 @@ name: "🔄 Upstream sync (fleet)"
 
 on:
   schedule:
-    - cron: "17 2 * * *"   # 07:47 IST — daily
+    - cron: "17 2 * * *"   # 02:17 UTC (07:47 AM IST) — daily
   workflow_dispatch:
     inputs:
       mode:
