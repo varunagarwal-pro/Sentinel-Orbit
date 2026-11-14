@@ -1,124 +1,135 @@
-# 🛰️ Sentinel Orbit — Autonomous Fleet Storage & Workflow Hygiene Engine
+# 🛰️ Sentinel-Orbit — Autonomous Fleet Upstream Sync & Storage Hygiene Satellite
 
 [![Ecosystem](https://img.shields.io/badge/Ecosystem-Sentinel--Labs-blue?style=for-the-badge&logo=shield)](https://github.com/varunagarwal-pro)
-[![Security](https://img.shields.io/badge/Security-Zero--Code%20Access%20Fortress-red?style=for-the-badge&logo=securityscorecard)](https://github.com/varunagarwal-pro/Sentinel-Orbit)
+[![Security](https://img.shields.io/badge/Security-Isolated%20PAT%20Fortress-red?style=for-the-badge&logo=securityscorecard)](https://github.com/varunagarwal-pro/Sentinel-Orbit)
 [![Runner-Cost](https://img.shields.io/badge/Runner%20Cost-0%20Min%20(Free%20Tier)-brightgreen?style=for-the-badge&logo=githubactions)](https://github.com/varunagarwal-pro/Sentinel-Orbit/actions)
-[![Fleet-Scope](https://img.shields.io/badge/Fleet%20Scope-45%2B%20Repositories-orange?style=for-the-badge&logo=git)](https://github.com/varunagarwal-pro)
+[![Fleet-Scope](https://img.shields.io/badge/Fleet%20Scope-47%20Repositories-orange?style=for-the-badge&logo=git)](https://github.com/varunagarwal-pro)
+[![Upstream-Sync](https://img.shields.io/badge/Upstream%20Sync-41%20Enrolled%20Repos-blueviolet?style=for-the-badge&logo=gitkraken)](https://github.com/varunagarwal-pro/Sentinel-Orbit/actions/workflows/fleet-upstream-sync.yml)
 [![Status](https://img.shields.io/badge/Status-Active%20Production-success?style=for-the-badge)](https://github.com/varunagarwal-pro/Sentinel-Orbit/actions)
 
-> **📌 Document Authority:** Canonical architecture, security boundary, and operational guide for **Sentinel-Orbit**.  
-> **📅 Version:** 1.0.0 (Production Release)  
+> **📌 Document Authority:** Canonical architecture, operational runbook, and security boundary for **Sentinel-Orbit**.  
+> **📅 Version:** 2.0.0 (Unified Twin-Engine Production Architecture)  
 > **👤 Lead Maintainer:** Varun Agarwal (Sentinel Labs)
 
 ---
 
 ## 🌌 1. System Overview & Architectural Purpose
 
-**`Sentinel-Orbit`** is the autonomous, zero-cost maintenance satellite orbiting the entire **Sentinel Labs** multi-cloud and repository ecosystem. It runs serverless inside GitHub Actions, executing daily hygiene and storage quota enforcement across every repository owned by [`@varunagarwal-pro`](https://github.com/varunagarwal-pro).
+**`Sentinel-Orbit`** serves as the autonomous, serverless satellite orbiting the entire **Sentinel Labs** superproject ecosystem. Running inside GitHub Actions on a public repository, it leverages **100% free and unlimited public runner minutes** to execute two mission-critical automated pipelines across every repository under [`@varunagarwal-pro`](https://github.com/varunagarwal-pro):
+
+1. **🛰️ Engine 1: Fleet Upstream Synchronization (`fleet-upstream-sync.yml`)**  
+   Continuously monitors, mirrors, and stages incoming code from upstream open-source projects across 41 enrolled repositories with zero risk to local customizations.
+2. **🧹 Engine 2: Account Storage & Workflow Run Pruner (`fleet-storage-prune.yml`)**  
+   Enforces a strict 0 MB GitHub Actions cache ceiling and purges historical run backlogs across all 47 account repositories.
 
 ```
-                                  ╔═════════════════════════════════════════╗
-                                  ║             SENTINEL-ORBIT              ║
-                                  ║   (Autonomous Public Fleet Satellite)   ║
-                                  ╚═════════════════════════════════════════╝
-                                                       │
-                           [ 100% Free & Unlimited Actions Runner Minutes ]
-                                                       │
-                  ┌────────────────────────────────────┼────────────────────────────────────┐
-                  │                                    │                                    │
-                  ▼                                    ▼                                    ▼
-    ┌───────────────────────────┐        ┌───────────────────────────┐        ┌───────────────────────────┐
-    │    DYNAMIC FLEET DISCOVERY│        │   SURGICAL RUN HYGIENE    │        │  CACHE QUOTA ENFORCEMENT  │
-    │  • Dynamic API Pagination │        │  • In-Flight Run Immune   │        │  • 0 MB Cache Footprint   │
-    │  • Public & Private Repos │        │  • Preserves Latest Run   │        │  • Daily Eviction Cycle   │
-    │  • 45+ Repos Auto-Detected│        │  • Historical Run Pruner  │        │  • Prevents Quota Lockout │
-    └───────────────────────────┘        └───────────────────────────┘        └───────────────────────────┘
+                                  ╔═════════════════════════════════════════════╗
+                                  ║               SENTINEL-ORBIT                ║
+                                  ║    (Autonomous Zero-Cost Fleet Satellite)   ║
+                                  ╚═════════════════════════════════════════════╝
+                                                         │
+                                    [ 100% Free & Unlimited Actions Minutes ]
+                                                         │
+                   ┌─────────────────────────────────────┴─────────────────────────────────────┐
+                   │                                                                           │
+                   ▼                                                                           ▼
+ ┌───────────────────────────────────────────┐               ┌───────────────────────────────────────────┐
+ │ 🛰️ ENGINE 1: FLEET UPSTREAM SYNC          │               │ 🧹 ENGINE 2: STORAGE & RUN PRUNER         │
+ │ • Daily Schedule: 02:17 UTC (07:47 IST)   │               │ • Trigger: Event-Chained (workflow_run)   │
+ │ • 41 Enrolled Fleet Repositories          │──────────────►│ • Fallback Schedule: 04:00 UTC (09:30 IST)│
+ │ • Tiers A, B, C & X Integration           │  (Auto-fires  │ • Dynamically Scans 100% Account Repos    │
+ │ • Topic Branch: upstream-try-merge        │  on complete) │ • 0 MB Actions Cache Ceiling              │
+ │ • Dispatches Alerts to @VarunOpsBot       │               │ • In-Flight Run Immunity Shield           │
+ └───────────────────────────────────────────┘               └───────────────────────────────────────────┘
 ```
 
 > [!IMPORTANT]
-> **Zero Runner Minute Deductions:**  
-> By deploying `Sentinel-Orbit` as a standalone public repository, GitHub Actions provides **unlimited, 100% free runner execution minutes**. Zero minutes are consumed from your account's private 2,000-minute monthly allocation, reserving all private runner quotas exclusively for production builds, Docker packaging, and application testing.
+> **Zero Billable Runner Minute Impact:**  
+> By deploying `Sentinel-Orbit` as a dedicated public satellite, GitHub Actions provides **unlimited, 100% free runner minutes**. Zero minutes are consumed from your private 2,000-minute monthly organization allowance, reserving private quotas exclusively for application builds, tests, and deployments.
 
 ---
 
-## 🎯 2. Core Operational Capabilities
+## 🛰️ 2. Engine 1: Fleet Upstream Sync Architecture
 
-| Capability | Technical Implementation | Operational Guarantee |
-|---|---|---|
-| **Zero-Configuration Discovery** | Queries `GET /user/repos?per_page=100&affiliation=owner` with full automatic pagination. | Any new repository, fork, or experiment created in the account is automatically discovered and cleaned on the next run with **zero manual registration**. |
-| **Actions Cache Zero-Quota** | Calls `GET /repos/{owner}/{repo}/actions/caches` followed by targeted `DELETE` operations. | Maintains a **0 MB** cache footprint across all repositories, preventing GitHub Actions storage quota exhaustion on free accounts. |
-| **Surgical Run Preservation** | Groups historical runs by `workflow_id`, sorting chronologically descending (`created_at`). | Strictly preserves the **single latest completed run** for every active workflow. Historical backlogs are pruned cleanly. |
-| **In-Flight Safety Shield** | Inspects run lifecycle status flags (`in_progress`, `queued`). | Any running build or pending queue item is **strictly immune** from deletion. Active deployments are never disrupted. |
-| **Abuse-Rate Pacing** | Token-bucket pacing (`0.08s` sleep between mutations) with backoff. | Operates well below GitHub secondary API rate limits, avoiding HTTP 429 throttling during multi-hundred run purges. |
-| **Rich Audit Telemetry** | Emits live Markdown dashboards directly into `$GITHUB_STEP_SUMMARY`. | Provides full transparency with a collapsible per-repository audit table showing freed MBs, purged caches, and pruned runs. |
+The Upstream Sync Engine operates in accordance with the master governance policy defined in `Sentinel-Core/Docs/Upstream-Repo-Sync.md`. It dynamically checks out the Python fleet engine and `upstream/fleet.toml` from `Sentinel-Labs` using secret `FLEET_SYNC_PAT` and executes preflight AST linting and unit tests before orchestrating fleet changes.
 
----
+### 🏢 Four-Tier Repository Governance Matrix
 
-## 🔒 3. Zero-Code-Access Security Fortress
+| Tier | Role | Count | Synchronization Strategy | Operational Guardrails |
+| :---: | :--- | :---: | :--- | :--- |
+| **Tier A** | **Pure Mirrors** | **32** | Fast-forward only directly to upstream HEAD when `ahead == 0`. | Zero local custom code. GitHub Actions are disabled on mirrors to prevent duplicate CI runs and noise. |
+| **Tier B** | **Curated Downstreams** | **2** | Force-reset mirror branch to upstream (`upstream-mirror`). Working branch (`dev`/`main`) is never touched. | Triage issue tracks pending commits against a cryptographic SHA ledger (`upstream/ledgers/`). Ports applied by hand. |
+| **Tier C** | **Maintained Custom Forks** | **6** | Trial merge (`git merge-tree`). Clean merges push to topic branch `upstream-try-merge` and open a PR. | Nothing automatic ever writes to working branches. Gate workflow must pass. Branch automatically deleted upon merge. |
+| **Tier X** | **Frozen / Isolated** | **1** | Excluded from upstream automation (e.g. `Blokada-TV`). | Independent codebase; unconfirmed or archived upstream. |
 
-`Sentinel-Orbit` is architected under the **Principle of Least Privilege**. It operates using a Fine-Grained Personal Access Token (PAT v2) named **`PAT_JANITOR`** (or `PAT_ORBIT`) configured with mathematical isolation against source code access:
+### 🌿 The `upstream-try-merge` Lifecycle
+
+For Tier C repositories (`Technitium-DnsServer`, `uno-launchpad-kit`, `firestack`, `Technitium-DNS-Companion`, `technitium-webui`, `nextcloud-integration`), incoming code is staged on a flat, dedicated topic branch:
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────────────────────┐
-│                           SENTINEL-ORBIT SECURITY ACCESS CONTRACT                           │
-└─────────────────────────────────────────────────────────────────────────────────────────────┘
-  ├── ✅ Actions (Read & Write)     ➔  Required to list and delete workflow runs and Actions caches
-  ├── ✅ Metadata (Read-Only)       ➔  Mandatory GitHub API gateway resource routing
-  ├── ❌ Contents (NO ACCESS)       ➔  BLOCKED: Cannot read, clone, view, or write repository code
-  ├── ❌ Secrets (NO ACCESS)        ➔  BLOCKED: Cannot view, access, or modify repository secrets
-  ├── ❌ Administration (NO ACCESS) ➔  BLOCKED: Cannot delete, rename, or modify repository settings
-  └── ❌ Pull Requests (NO ACCESS)  ➔  BLOCKED: Zero interaction with developer pull requests
+upstream (remote) ────► upstream-mirror (1:1 pure mirror, reset-only)
+                              │
+                              ▼  (trial merge with working branch)
+                         upstream-try-merge (clean staging branch)
+                              │
+                              ▼  (pull request + CI gate verification)
+                         main / dev (your production branch with custom commits)
 ```
 
-> [!NOTE]
-> **External Fork Isolation:**  
-> In accordance with GitHub enterprise security standards, workflows running in this repository do not listen to external pull requests (`pull_request`). GitHub physically bars external fork PRs from accessing repository secrets. Only authorized scheduled crons and authenticated owner dispatches can trigger `Sentinel-Orbit`.
+* **Automated Branch Cleanup:** As soon as an `upstream-try-merge` Pull Request is reviewed and merged into your working branch, the branch is **automatically deleted** from GitHub via engine-side API checks and native `delete-branch-on-merge` settings.
+* **Alerting & Digest:** Results are reported in real-time to `@VarunOpsBot` via Telegram with explicit status badges (`UP-TO-DATE`, `SYNCED`, `PR-OPEN`, `CONFLICT`, `PENDING`).
 
 ---
 
-## ⚙️ 4. Execution Schedule & Manual Controls
+## 🧹 3. Engine 2: Account Storage & Run Hygiene
 
-`Sentinel-Orbit` runs on an automated daily clock and supports on-demand manual triggers via `workflow_dispatch`:
+The Storage & Run Pruner runs serverless across all **47 repositories** under [`@varunagarwal-pro`](https://github.com/varunagarwal-pro) using Python 3.11 with 64-bit multi-threaded rate-limited execution.
 
-```yaml
-on:
-  schedule:
-    # Daily at 04:00 UTC (9:30 AM IST) - 1 hour after upstream sync
-    - cron: '0 4 * * *'
-  workflow_dispatch:
-    inputs:
-      dry_run:
-        description: 'Simulate audit without mutating remote resources'
-        type: boolean
-        default: false
-      keep_runs:
-        description: 'Number of latest completed runs to preserve per workflow'
-        type: number
-        default: 1
-```
-
-### Manual Trigger Instructions:
-1. Navigate to the [**Sentinel-Orbit Actions Tab**](https://github.com/varunagarwal-pro/Sentinel-Orbit/actions).
-2. Select **`🛰️ Sentinel-Orbit: Fleet Storage & Run Pruner`**.
-3. Click **"Run workflow"**.
-4. *(Optional)* Check `dry_run` for a non-destructive simulation or change `keep_runs` to retain more historical runs.
+### 🎯 Core Capabilities:
+* **0 MB Cache Ceiling:** Purges expired and stale GitHub Actions caches across all repositories, maintaining a clean storage quota.
+* **Latest Run Preservation:** Groups historical runs by workflow ID and preserves the **single latest completed run** for every active workflow, cleanly deleting obsolete historical backlogs.
+* **In-Flight Safety Shield:** Actively detects `in_progress` and `queued` runs and marks them **strictly immune** from deletion, ensuring ongoing CI/CD jobs are never disturbed.
+* **Event-Chained Trigger:** Automatically executes immediately upon completion of the Upstream Sync Engine, ensuring newly generated sync run logs and build caches are swept without waiting.
 
 ---
 
-## 📊 5. Verified Deployment Metrics
+## ⏱️ 4. Execution Schedules & Trigger Modes
 
-During initial deployment and live verification, `Sentinel-Orbit` purged the existing historical backlog across the account:
+| Pipeline | Workflow File | Trigger Types | Original Schedule (UTC) | Indian Standard Time (IST, UTC+5:30) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Upstream Sync Engine** | `fleet-upstream-sync.yml` | Scheduled Cron + Manual Dispatch | `17 2 * * *` (Daily) | **07:47 AM IST (Daily)** |
+| **Storage & Run Pruner** | `fleet-storage-prune.yml` | Event Chained (`workflow_run`) + Daily Cron + Manual Dispatch | `0 4 * * *` (Daily fallback) | **09:30 AM IST (Daily fallback)**<br>*(or immediately after sync)* |
 
-- **Total Repositories Processed:** 45 repositories
-- **Total Actions Caches Purged:** 26 caches
-- **Account Cache Storage Freed:** **1,387.58 MB (~1.36 GB)** $\rightarrow$ Reclaimed to **0 MB**
-- **Historical Workflow Runs Purged:** 644 historical runs
-- **Active Workflow Runs Preserved:** 34 latest runs
-- **Runner Execution Duration:** 36 seconds
-- **Actions Minutes Incurred:** **0 minutes** (100% Free)
+### Manual Dispatch Parameters:
+
+#### 1. Upstream Sync Engine:
+* `mode`: `apply` (writes mirrors, opens PRs/issues) or `check` (read-only audit dry run).
+* `repo`: Optional single repository name to target (leave blank to run the entire 41-repo fleet).
+
+#### 2. Storage & Run Pruner:
+* `dry_run`: `true` for simulated non-destructive audit, `false` for live purge.
+* `keep_runs`: Number of completed runs to retain per workflow (default: `1`).
 
 ---
 
-## 🤝 6. Governance & Submodule Matrix
+## 🔒 5. Security Boundary & Access Isolation
 
-`Sentinel-Orbit` functions as an operational satellite to the master [**Sentinel-Labs**](https://github.com/varunagarwal-pro/Sentinel-Labs) ecosystem. Its core script is mirrored into the centralized tools directory at `tools/prune_account_storage.py` for local and fleet orchestration.
+`Sentinel-Orbit` operates under strict least-privilege security controls:
+
+* **Engine & Policy Isolation:** Source code for the fleet engine and `fleet.toml` live securely in the private `Sentinel-Labs` repository. `Sentinel-Orbit` checks them out into ephemeral runner memory using secret `FLEET_SYNC_PAT` and never retains copies in public storage.
+* **Granular Secrets:**
+  * `FLEET_SYNC_PAT`: Scoped Fine-Grained Personal Access Token with repository contents and pull request permissions.
+  * `PAT_ORBIT` / `PAT_JANITOR`: Dedicated token scoped exclusively for Actions cache and run pruning.
+  * `VARUN_OPS_BOT_TOKEN` & `TELEGRAM_CHAT_ID`: Encrypted bot credentials for Telegram dispatch.
+* **External PR Isolation:** Workflows in this repository ignore external pull requests (`pull_request`), physically barring third-party code from accessing runner secrets.
+
+---
+
+## 🤝 6. Governance & Master Superproject Linkage
+
+`Sentinel-Orbit` is an autonomous operational satellite to the master [**Sentinel-Labs**](https://github.com/varunagarwal-pro/Sentinel-Labs) ecosystem.
+
+* **Master Upstream Specification:** `Sentinel-Core/Docs/Upstream-Repo-Sync.md`
+* **Fleet Configuration:** `Sentinel-Labs/upstream/fleet.toml`
+* **Fleet Engine Source:** `Sentinel-Labs/tools/upstream/`
+* **Local Pruner Script:** `Sentinel-Labs/tools/prune_account_storage.py`
