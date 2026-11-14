@@ -1,4 +1,4 @@
-name: "🔄 Fleet: Upstream Sync Engine"
+name: "🛰️ Fleet: Upstream Sync Engine"
 
 # Runs from Sentinel-Orbit (public repo) to use free unlimited Actions minutes.
 # The fleet engine and fleet.toml live in the private Sentinel-Labs repo, checked

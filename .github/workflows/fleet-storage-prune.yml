@@ -2,7 +2,7 @@ name: "🧹 Fleet: Storage & Run Pruner"
 
 on:
   workflow_run:
-    workflows: ["🔄 Fleet: Upstream Sync Engine"]
+    workflows: ["🛰️ Fleet: Upstream Sync Engine"]
     types:
       - completed
   schedule:
